@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Главная О!Суши{% endblock %}
+
+{% block content %}
+    <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            <div class="single-hero-items set-bg" data-setbg="{% static 'img/heroo-1.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <span>ДОБРО ПОЖАЛОВАТЬ!</span>
+                            <h1 style="color:white">Black friday</h1>
+                            <p style="color:white">вкус в каждом кусочке</p>
+                            <a style="color:black" href="#" class="primary-btn">Заказать суши</a>
+                        </div>
+                    </div>
+                    <div class="off-card">
+                        <h2 style="color:black">Скидка <span>10%</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="single-hero-items set-bg" data-setbg="{% static 'img/heroo-2.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <span>ДОБРО ПОЖАЛОВАТЬ!</span>
+                            <h1 style="color:white">Black friday</h1>
+                            <p style="color:white">вкус в каждом кусочке</p>
+                            <a style="color:black" href="#" class="primary-btn">Заказать суши</a>
+                        </div>
+                    </div>
+                    <div class="off-card">
+                        <h2 style="color:black" >Скидка <span>10%</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Banner Section Begin -->
+    <div class="banner-section spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-2" style="margin: auto;">
+                    <div class="single-banner">
+                        <img src="{% static 'img/bg-image1.png' %}"alt="">
+                        <div class="inner-text">
+                            <h4 style="color: #7ec242; font-weight: 800; text-align: center;">СВЕЖИЕ ОВОЩИ</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-2" style="margin: auto;">
+                    <div class="single-banner">
+                        <img src="{% static 'img/bg-image2.png' %}" alt="">
+                        <div class="inner-text">
+                            <h4 style="color: #ed1890; font-weight: 800; text-align: center;">ЛУЧШАЯ РЫБА</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-8" style="margin: auto;">
+                    <div class="single-banner">
+                        <img src="{% static 'img/bg-image4.png' %}" alt="">
+                        <div class="inner-text">
+                            <h4 style="color: #818385; font-weight: 800; text-align: center;">ФИРМЕННЫЙ РЕЦЕПТ РИСА</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-8" style="margin: auto;">
+                    <div class="single-banner">
+                        <img src="{% static 'img/bg-image3.png' %}" alt="">
+                        <div class="inner-text">
+                            <h4 style="color: #344a54; font-weight: 900; text-align: center;">ДОСТАВКА БЫСТРЕЕ ВЕТРА</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Section End -->
+
+    <!-- Women Banner Section Begin -->
+    <section class="women-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2 style="color:black">🅂К🄽Д🄺А 1͟͟͟͞͞͞0͟͟͟͞͞͞%</h2>
+                    <div class="product-large set-bg" data-setbg="{% static 'img/18799-soki-z-wyciskarki.jpg' %}">
+                        <h2 style="color:white">🅞+🅢🅤🅢🅗🅘</h2>
+                        <a href="#">🅳🅸🆂🅲🅾🆅🅴🆁 🅼🅾🆁🅴͞</a>
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-1">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Напитки</li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                        {% for product in products_napitki %}
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{{ product.image.url }}" alt="">
+                                <div class="sale">Скидка</div>
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="{% url 'add-to-cart' pk=product.pk %}"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product-detail' product.pk %}">Узнать больше</a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{ product.category.name }}</div>
+                                <a href="{% url 'product-detail' product.pk %}">
+                                    <h5>{{ product.title }}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {{ product.price }}
+                                    <span>-10%</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Women Banner Section End -->
+
+
+
+
+  <!-- Products section -->
+  <section id="aa-product" style="margin-bottom: 100px">
+    <div class="container">
+      <div class="row">
+
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-4 col-6" style="text-align: center; margin-bottom: 35px">
+                      <div class="card" style="width: 33rem;">
+                          <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h3 class="card-title" style="font-weight: bold; margin-top: 5px;">{{ product.title }}</h3>
+                            <h5 class="card-title" style="font-weight: bold; margin-top: 5px;">{{ product.additional_information  }}</h5>
+                            <p class="card-text">{{ product.description|truncatewords:8 }}</p>
+                          <div class="price-t" style="width: 100px; line-height: 1; padding: 7px; color: #fff; background-color: #ed1890; margin: 20px auto 0 auto">
+                              <h5 style="font-weight: 900; font-size: 18px;">{{ product.price | floatformat:"0" }} сом</h5>
+                          </div>
+                              <div class="col-12">
+                                  <div class="d-grid gap-2 col-8 mx-auto">
+                                    <a href="{% url 'product-detail' product.pk %}" class="btn button b-button solid" style="background-color: #7cc832; padding: 15px; color: white; margin-top: 20px;     text-transform: uppercase;">
+                                        Подробнее
+                                    </a>
+                                  </div>
+                                  </div>
+                          </div>
+                        </div>
+                  </div>
+                {% endfor %}
+            </div>
+          <div class="col-lg-12">
+            <div class="loading-more">
+                <i class="icon_loading"></i>
+                <a href="{% url 'products-list' %}">
+                    Все продукты
+                </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Man Banner Section Begin -->
+    <section class="man-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Супы</li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                        {% for product in products_category %}
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{{ product.image.url }}" alt="">
+                                <div class="sale">Скидка</div>
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="{% url 'add-to-cart' pk=product.pk %}"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product-detail' product.pk %}">Узнать больше</a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{ product.category.name }}</div>
+                                <a href="{% url 'product-detail' product.pk %}">
+                                    <h5>{{ product.title }}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {{ product.price }}
+                                    <span>-10%</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h2 style="color:black">🅂К🄽Д🄺А 1͟͟͟͞͞͞0͟͟͟͞͞͞%</h2>
+                    <div class="product-large set-bg" data-setbg="{% static 'img/products/women-larges.jpg' %}">
+                        <h2 style="color:white">🅞+🅢🅤🅢🅗🅘</h2>
+                        <a href="#">🅳🅸🆂🅲🅾🆅🅴🆁 🅼🅾🆁🅴͞</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Man Banner Section End -->
+
+
+
+{% endblock %}

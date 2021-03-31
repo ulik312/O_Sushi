@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+
+      <style type="text/css">
+          .navbar {
+            background-color: #ececec;
+            padding-bottom: 0px;
+            border-bottom: 7px solid black;
+          }
+          .nav-item {
+            padding-left: 100px;
+          }
+          ul .nav .nav-pills .mb-3 {
+            padding-top: 10px;
+            padding-bottom: 0px;
+          }
+          .nav-item {
+            border-right: 1px solid black;
+          }
+          .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+                color: black;
+                background-color: #efe339;
+                padding: 20px;
+            }
+            .navbar-top {
+                background-color: black;
+            }
+            .navbar-top ul {
+                padding-top: 0px;
+                text-align: center;
+            }
+            li {
+                list-style-type: none;
+            }
+            .navbar-top-li {
+                list-style-type: none;
+                display: inline-block;
+                width: 185px;
+                color: #fff;
+                padding: 5px;
+                border-right: 1px solid #fff;
+            }
+            .content-item {
+                background-color: #dbdbdb;
+            }
+            .content-item ul li {
+                color: black;
+                padding: 20px;
+            }
+            .content-item-a {
+                text-decoration: none;
+            }
+            .content-item-buttons-li {
+                display: inline-block;
+            }
+            .content-item-buttons {
+                text-align: right;
+                background-color: #ececec;
+            }
+
+            .h4-icon {
+                display: inline-block;
+                padding: 5px;
+            }
+      </style>
+      <title>Админ панель. О!Суши</title>
+  </head>
+  <body>
+      <div class="navbar">
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                    <i class="icon-plus"></i>
+                    <h4>НОВЫЙ</h4>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                    {{ count }}
+                    <h4>АКТИВНЫЕ</h4>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-contac-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                    0
+                    <h4>ПРЕДЗАКАЗЫ</h4>
+                </button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-ended-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                    0
+                    <h4>ЗАВЕРШЕННЫЕ</h4>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-cassa-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                    <i class="icon-money"></i>
+                    <h4>КАССА</h4>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-otchet-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                    <i class="icon-calendar"></i>
+                    <h4>ОТЧЕТЫ</h4>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-chat-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                    <i class="icon-comments"></i>
+                    <h4>Чат админов</h4>
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+            </div>
+      </div>
+      <div class="navbar-top">
+          <ul>
+              <li class="navbar-top-li">№ ЗАКАЗА</li>
+              <li class="navbar-top-li">СОСТОЯНИЕ</li>
+              <li class="navbar-top-li">ВРЕМЯ</li>
+              <li class="navbar-top-li">АДРЕС ДОСТАВКИ</li>
+              <li class="navbar-top-li">ИМЯ/ТЕЛЕФОН</li>
+              <li class="navbar-top-li">СУММА</li>
+              <li class="navbar-top-li">ТОЧКА</li>
+              <li class="navbar-top-li">КУРЬЕР</li>
+              <li class="navbar-top-li">ДИСПЕТЧЕР</li>
+          </ul>
+      </div>
+      <div class="content-item">
+          {% for order in orders %}
+              <a href="" class="content-item-a">
+                  <ul>
+                      <li class="content-li navbar-top-li" style="background-color: #e5cf27">{{ order.id }}</li>
+                      <li class="content-li navbar-top-li" style="background-color: #e8df6e">
+                          {{ order.status }}
+                          <input type="checkbox" style="margin: auto; ">
+                      </li>
+                      <li class="content-li navbar-top-li">{{ order.create_at }}</li>
+                      <li class="content-li navbar-top-li">{{ order.address }}</li>
+                      <li class="content-li navbar-top-li">{{ order.phone }}</li>
+                      <li class="content-li navbar-top-li">{{ total_price_product }}</li>
+                      <li class="content-li navbar-top-li" style="background-color: #96cdf7">{{ order.branch }}</li>
+                      <li class="content-li navbar-top-li" style="background-color: #e5cf27">{{ order.delivery_type }}</li>
+                      <li class="content-li navbar-top-li">{{ order.branch }}</li>
+                  </ul>
+              </a>
+              <ul class="content-item-buttons">
+                  <h4 class="h4-icon" style="color: blue"><i class="icon-check-sign">  Выполнить</i></h4>
+                  <h4 class="h4-icon" style="color: blue"><i class="icon-remove-sign"> Отменить</i></h4>
+              </ul>
+          {% endfor %}
+      </div>
+
+  <div class="container">
+      <div class="row">
+
+      </div>
+
+  </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+              crossorigin="anonymous"></script>
+      <!--
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+      -->
+
+  </body>
+</html>

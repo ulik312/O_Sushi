@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Удаление продукта{% endblock %}
+
+{% block content %}
+<h1>Вы уверены, что хотите удалить этот продукт?</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="button">Удалить продукт</button>
+    <a href="{% url 'products-list' %}" class="button" role="button">Отменить</a>
+</form>
+
+{% endblock %}

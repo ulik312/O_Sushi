@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Log in{% endblock %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+{% block content %}
+<div class="container">
+<!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Главная</a>
+                        <span>Вход</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Form Section Begin -->
+</div>
+
+    <div class="register-login-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="login-form">
+                        <h2>Login</h2>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="group-input">
+                                <label for="email">{{ form.email.label_tag }}</label>
+                                <input name="email" type="email" id="email">
+                            </div>
+                            <div class="group-input">
+                                <label for="password">{{ form.password.label_tag }}</label>
+                                <input name="password" type="password" id="password">
+                            </div>
+                            <button type="submit" class="site-btn login-btn">Войти</button>
+                        </form>
+                        <div class="switch-login">
+                            <a href="{% url 'registration' %}" class="or-login">Or Create An Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Корзина{% endblock %}
+
+
+{% block content %}
+
+ <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Главная</a>
+                        <span>Ваша корзина</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+
+          <ul class="messages">
+            {% for message in messages %}
+              <div class="alert alert-success" role="alert">
+                  <strong>{{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+          </ul>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Изображение</th>
+                                    <th class="p-name">Наименование</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Общая цена</th>
+                                    <th><i class="ti-close"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in cart_items %}
+                                <tr>
+                                    <td class="cart-pic first-row"><img src="{{ item.product.image.url }}" alt="" width="150px" height="auto"></td>
+                                    <td class="cart-title first-row">
+                                        <h4 style="font-weight: 900">{{ item.product.title }}</h4>
+                                    </td>
+                                    <td class="p-price first-row">{{ item.product.price | floatformat:"0" }} сом</td>
+                                    <td class="qua-col first-row">
+                                        <div class="quantity">
+                                            <form action="{% url 'change_qty' item.product.pk %}" method="POST">
+                                                {% csrf_token %}
+                                                <div class="pro-qty">
+                                                    <input name="change_qty" type="number" min="1" value="{{ item.qty }}">
+                                                </div>
+                                                    <input type="submit" class="btn btn-success" style="background-color: #ed1890; margin: 10px 58px 0 0" value="Изменть кл-во">
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td class="total-price first-row">{{ item.final_price | floatformat:"0" }} сом</td>
+                                    <td class="close-td first-row"><a href="{% url 'remove-from-cart' item.product.pk %}"><i class="ti-close"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                            {% if count_products == 0 %}
+                                <h1 style="margin-top: -50px; color: #ed1890; text-align: center"><strong>Ваша корзина пуста</strong></h1>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="cart-buttons">
+                                <a href="{% url 'products-list' %}" class="primary-btn up-cart" style="background-color: #e7ab3c">Продолжить покупку</a>
+                            </div>
+                            <div class="discount-coupon">
+                                <h6><strong>Промокод</strong></h6>
+                                <form action="#" class="coupon-form">
+                                    <input type="text" placeholder="Введите ваш код">
+                                    <button type="submit" class="site-btn coupon-btn" >Применить</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 offset-lg-4">
+                            <div class="proceed-checkout">
+                                <ul>
+                                    <li class="subtotal"><strong>Итого: </strong><span>{{ count_products }}</span></li>
+                                    <li class="cart-total">Общая цена: <span>{{ total_price_product | floatformat:"0" }} сом</span></li>
+                                </ul>
+                                <a href="{% url 'order_checkout' %}" class="proceed-btn" style="background-color: #e7ab3c; color: black">Перейти к оформлению</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+
+
+
+{% endblock %}

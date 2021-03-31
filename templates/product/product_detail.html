@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.title }}{% endblock %}
+
+
+{% block content %}
+<style type="text/css">
+.product-details .pd-desc h4 {
+    color: #ed1890;
+    font-weight: 700;
+}
+.bg-color {
+    background-color: #ed1890;
+}
+</style>
+<!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Главная</a>
+                        <a href="{% url 'category-detail' product.category.slug %}">{{ product.category.name }}</a>
+                        <span>{{ product.title }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Product Shop Section Begin -->
+    <section class="product-shop spad page-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Цена</h4>
+                        <div class="filter-range-wrap">
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input name="min" type="text" id="minamount">
+                                        <input name='max' type="text" id="maxamount">
+<!--                                        <a type="submit" href="#" class="filter-btn" style="">Отсортировать</a>-->
+                                        <button class="filter-btn" type="submit" >Отсортировать</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                data-min="100" data-max="1000">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-lg-9">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="product-pic-zoom">
+                                <img class="product-big-img" src="{{ product.image.url }}" alt="">
+                                <div class="zoom-icon">
+                                    <i class="fa fa-search-plus"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="product-details">
+                                <div class="pd-title">
+                                    <span>{{ product.category.name }}</span>
+                                    <h3>{{ product.title }}</h3>
+                                    {% if request.user.is_superuser %}
+                                    <a href="{% url 'product-edit' product.pk %}" class="heart-icon"><i class="icon-edit"></i></a>
+                                    <a href="{% url 'product-delete' product.pk %}" class="icon"><i class="icon-archive"></i></a>
+                                    {% endif %}
+                                </div>
+                                <div class="pd-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <span>(5)</span>
+                                </div>
+                                <div class="pd-desc">
+                                    <p>{{ product.description }}</p>
+                                    <h4>{{ product.price | floatformat:"0" }} сом</h4>
+                                </div>
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="text" value="1">
+                                    </div>
+                                    {% if request.user.is_authenticated %}
+                                        <a href="{% url 'add-to-cart' pk=product.pk %}" class="primary-btn pd-cart bg-color">В корзину</a>
+                                    {% endif %}
+<!--                                    <form id="form_buying_product">-->
+<!--                                    <button type="submit" id="submit_btn" class="btn button b-button solid" style="background-color: #7cc832; padding: 15px; color: white; margin-top: 20px;     text-transform: uppercase;"-->
+<!--                                          data-product_price="{{ product.price }}"-->
+<!--                                          data-product_id="{{ product.id }}"-->
+<!--                                          data-product_title="{{ product.title }}"-->
+<!--                                          >-->
+<!--                                              В корзину-->
+<!--                                          </button>-->
+<!--                                        </form>-->
+                                </div>
+                                <ul class="pd-tags">
+                                    <li><span>Доп инфо</span>: {{ product.additional_information }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-tab">
+                        <div class="tab-item">
+                            <ul class="nav" role="tablist">
+                                <li>
+                                    <a class="active" data-toggle="tab" href="#tab-1" role="tab">ОПИСАНИЕ</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#tab-3" role="tab">ОТЗЫВЫ</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-item-content">
+                            <div class="tab-content">
+                                <div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
+                                    <div class="product-content">
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <h5>Описание</h5>
+                                                <p>{{ product.description }}</p>
+
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <img src="img/product-single/tab-desc.jpg" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade-in" id="tab-3" role="tabpanel">
+                                    <div class="customer-review-option">
+                                        <h4>Количество отзывов: {{ reviews_count }}</h4>
+                                        {% for review in reviews %}
+                                            <div class="comment-option">
+                                                <div class="co-item">
+                                                    <div class="avatar-pic">
+                                                        <img src="{% static 'img/product-single/avatar-1.png' %}" alt="">
+                                                    </div>
+                                                    <div class="avatar-text">
+                                                        <div class="at-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o"></i>
+                                                        </div>
+                                                        <h5>{{ review.user.name }} <span>{{ review.created }}</span></h5>
+                                                        <div class="at-reply">{{ review.body }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="leave-comment">
+                                            <form class="comment-form" method="post">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <input hidden name="user" value="{{ request.user.pk }}" type="text">
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input hidden name="product" value="{{ product.pk }}" type="text">
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <textarea name="body" placeholder="Messages"></textarea>
+                                                        <button type="submit" class="site-btn">Оставить отзыв</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Shop Section End -->
+
+    <!-- Related Products Section End -->
+    <div class="related-products spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Похожие продукты</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in products_4 %}
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{{ product.image.url }}" alt="">
+<!--                                <div class="sale">Sale</div>-->
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#" style="background: #ed1890;"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product-detail' product.pk %}">Посмотреть</a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{ product.category.name }}</div>
+                                <a href="{% url 'product-detail' product.pk %}">
+                                    <h5>{{ product.title }}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {{ product.price }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Related Products Section End -->
+
+{% endblock %}

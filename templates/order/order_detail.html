@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+    <style type="text/css">
+        .container {
+            width: 100%;
+            height: 849px;
+            margin-top: -145px;
+            background-color: #cccccc;
+           }
+    </style>
+</head>
+<body>
+<a href="{% url 'index_admin' %}">
+    1
+    <div class="container" style="background-image: url({% static 'img/bg-color-test.png' %});"></div>
+    </a>
+    <h1>Welcome to admin panel</h1>
+</body>
+</html>
